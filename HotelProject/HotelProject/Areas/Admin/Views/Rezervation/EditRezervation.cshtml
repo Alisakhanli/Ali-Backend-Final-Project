@@ -1,0 +1,46 @@
+﻿@model Reservations
+@{
+    ViewData["Title"] = "EditRezervation";
+}
+
+<h1>EditRezervation</h1>
+
+<form asp-controller="Rezervation" asp-action="UpdateRezervation" method="post" asp-route-id="@Model.Id">
+    <div class="form-group">
+        <label asp-for="CheckInDate">CheckInDate</label>
+        @Html.EditorFor(model => model.CheckInDate,
+                                    new
+                                         {
+                                    htmlAttributes = new
+                                             {
+                                    @type = "text",
+                                    @class = "datepicker-here"
+                                             }
+                                         })
+        <span asp-validation-for="CheckInDate"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CheckOutDate">CheckOutDate</label>
+        @Html.EditorFor(model => model.CheckOutDate,
+                                    new
+                                         {
+                                    htmlAttributes = new
+                                             {
+                                    @type = "text",
+                                    @class = "datepicker-here"
+                                             }
+                                         })
+        <span asp-validation-for="CheckOutDate"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AdultBedCount">AdultBedCount</label>
+        <input value="@Model.AdultBedCount" class="form-control" asp-for="AdultBedCount" placeholder="AdultBedCount" />
+        <span asp-validation-for="AdultBedCount"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ChildBedCount">ChildBedCount</label>
+        <input value="@Model.ChildBedCount" class="form-control" asp-for="ChildBedCount" placeholder="ChildBedCount" />
+        <span asp-validation-for="ChildBedCount"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

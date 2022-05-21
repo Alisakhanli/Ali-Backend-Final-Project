@@ -1,0 +1,31 @@
+﻿@model AddRoleViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddRole</title>
+</head>
+<body>
+    <div>
+        <span>@Model.user.UserName</span>
+        <span>@Model.user.Email</span>
+    </div>
+    <form method="post" asp-controller="User" asp-action="AddRole">
+        <input type="hidden" name="userId" value="@Model.user.Id" />
+        <select name="Role">
+            @foreach (var item in Model.Roles)
+            {
+                <option value="@item.Name">
+                    @item.Name
+                </option>
+            }
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

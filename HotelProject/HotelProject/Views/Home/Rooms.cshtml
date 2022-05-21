@@ -1,0 +1,148 @@
+﻿@model LayoutViewModel
+<!-- banner -->
+<section class="hotel-banner-simple hotel-transition-bottom hotelmenu">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="hotel-center hotel-title-frame">
+                    <h1 class="hotel-mb-20 hotel-h1-inner">Otaqlar</h1>
+                    <p class="hotel-mb-30">Laborum accusantium libero commodi. Voluptate consequatur itaque expedita accusamus impedit perspiciatis asperiores necessitatibus assumenda magnam ipsa.</p>
+                    <ul class="hotel-breadcrumbs">
+                        <li><a href="index.html">Ana Səhifə</a></li>
+                        <li><span>Otaqlar</span></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- banner end -->
+<!-- menu -->
+<section class="hotel-p-100-100">
+    <div class="container">
+        <div class="hotel-book-form hotel-book-form-2">
+            <form asp-controller="Home" asp-action="FilterRooms" method="post" >
+                <div class="row align-items-center">
+                    <div class="col-12 col-lg-3">
+                        <div class="hotel-input-frame hotel-book-form-2">
+                            <label asp-for="roomFilterViewModel.CheckIn" for="check-in">Gəliş</label>
+                            @Html.EditorFor(model => model.roomFilterViewModel.CheckIn,
+                                       new
+                                            {
+                                       htmlAttributes = new
+                                                {
+                                       @type = "text",
+                                       @class = "datepicker-here"
+                                                }
+                                            })
+
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3">
+                        <div class="hotel-input-frame">
+                            <label asp-for="roomFilterViewModel.CheckOut" for="check-out" class="hotel-add-icon">Gediş</label>
+                            @Html.EditorFor(model => model.roomFilterViewModel.CheckIn,
+                                       new
+                                            {
+                                       htmlAttributes = new
+                                                {
+                                       @type = "text",
+                                       @class = "datepicker-here"
+                                                }
+                                            })
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3">
+                        <div class="hotel-select-frame">
+                            <label asp-for="roomFilterViewModel.AdultBedCount" for="person">Böyük</label>
+                            <select asp-for="roomFilterViewModel.AdultBedCount" id="person">
+                                @for (int i = 1; i <= Model.rooms.Max(m=>m.AdultBedCount) ; i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-2">
+                        <div class="hotel-select-frame">
+                            <label asp-for="roomFilterViewModel.ChildBedCount" for="children">Uşaq</label>
+                            <select asp-for="roomFilterViewModel.ChildBedCount" id="children">
+                                @for (int i = 1; i <= Model.rooms.Max(m => m.ChildBedCount); i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                               
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-1 text-center imgLoad">
+                        <button type="submit" class="hotel-btn">
+                            <img class="lozad" src="~/img/icons/search.svg"
+                                 class="hotel-zoom"
+                                 alt="icon" /><span>Axtar</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <!-- <div class="hotel-filter hotel-mb-60">
+          <a href="#" data-filter="*" class="hotel-work-category hotel-current">Bütün Kateqoriyalar</a>
+          <a href="#" data-filter=".main" class="hotel-work-category">Ana Yeməklər</a>
+          <a href="#" data-filter=".desserts" class="hotel-work-category">Şirniyyatlar</a>
+          <a href="#" data-filter=".salads" class="hotel-work-category">Salatlar</a>
+        </div> -->
+
+
+        <div class="hotel-masonry-grid hotel-3-col">
+
+            <div class="hotel-grid-sizer"></div>
+            @foreach (var item in @Model.rooms)
+            {
+                <div class="hotel-masonry-grid-item hotel-masonry-grid-item-33 deluxe">
+
+                    <!-- room card -->
+                    <div class="hotel-room-card">
+                        <div class="hotel-cover-frame imgLoad">
+                            <a asp-controller="Home" asp-action="RoomDetails" asp-route-id="@item.Id"><img class="lozad" src="~/img/@item.RoomPhotos[0].Photo" alt="cover"></a>
+                        </div>
+                        <div class="hotel-description-frame">
+                            <div class="hotel-room-features">
+                                <div class="hotel-feature imgLoad">
+                                    <div class="hotel-icon-frame"><img class="lozad" src="~/img/icons/bed.svg" alt="icon"></div>
+                                    <span>@Html.Raw(item.AdultBedCount+item.ChildBedCount) Nəfərlik</span>
+                                </div>
+                                <div class="hotel-feature imgLoad">
+                                    <div class="hotel-icon-frame"><img class="lozad" src="~/img/icons/square.svg" alt="icon"></div>
+                                    <span>@item.RoomWidth Ft²</span>
+                                </div>
+                            </div>
+                            <a asp-controller="Home" asp-action="RoomDetails" asp-route-id="@item.Id">
+                                <h3 class="hotel-mb-20">@item.Name</h3>
+                            </a>
+                            <div class="hotel-text-light hotel-text-sm hotel-mb-20">@item.Desc</div>
+                            <div class="hotel-card-bottom imgLoad">
+                                <div class="hotel-price">@item.NightlyPrice M <span>/gecə</span></div>
+                                <a asp-controller="Home" asp-action="RoomDetails" asp-route-id="@item.Id" class="hotel-btn"><img class="lozad" src="~/img/icons/bookmark.svg" alt="icon">Rezerv et</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- room card end -->
+
+                </div>
+            }
+
+
+
+
+        </div>
+
+    </div>
+</section>
+

@@ -1,0 +1,87 @@
+﻿@model List<UserViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Basic Table</h4>
+                    <p class="card-description">
+                        Add class <code>.table</code>
+                    </p>
+                    <input type="text" id="categorysearch" placeholder="Search" />
+                    <div class="table-responsive">
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>FullName</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Actions</th>
+
+                                </tr>
+                            </thead>
+                            <tbody id="tablebody">
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr>
+                                        <td>@item.FullName</td>
+                                        <td>@item.UserName</td>
+                                        <td>@item.Email</td>
+                                        <td>@item.Role</td>
+
+
+                                        <td>
+                                            @{var result = ""; if (item.IsBlocked)
+                                                {
+                                                    result = "Activate";
+                                                }
+                                                else
+                                                {
+                                                    result = "Deactivate";
+                                                }
+                                            }
+
+                                            <a class="btn btn-primary" asp-controller="User" asp-action="AddRole" asp-route-id="@item.Id">AddRole</a>
+                                            <a class="btn btn-primary" asp-controller="User" asp-action="ChangePassword" asp-route-id="@item.Id">Change Password</a>
+                                            <form asp-controller="User" asp-action="@result" asp-route-id="@item.Id" method="post">
+                                                <button type="submit" class="btn btn-primary">
+                                                    @if (item.IsBlocked)
+                                                    {
+                                                        <span>Activate</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>Deactivate</span>
+                                                    }
+                                                </button>
+                                            </form>
+
+                                        </td>
+
+
+
+
+
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

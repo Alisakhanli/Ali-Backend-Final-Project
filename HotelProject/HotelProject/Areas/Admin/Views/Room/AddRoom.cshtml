@@ -1,0 +1,50 @@
+﻿@model RoomAddViewModel
+@{
+    ViewData["Title"] = "AddRoom";
+}
+
+
+<form method="post" enctype="multipart/form-data" asp-controller="Room" asp-action="AddRoom" asp-route-id="@Model.HotelId">
+    <div class="d-flex flex-column">
+        <h1>AddRoom</h1>
+        <label asp-for="Name">Name</label>
+        <input placeholder="Name" asp-for="Name" class="form-control" />
+        @Html.ValidationMessage("Name", new
+   {
+       @class = "text-danger"
+   })
+        <label asp-for="Desc">Desc</label>
+        <input placeholder="Desc" asp-for="Desc" class="form-control" />
+        @Html.ValidationMessage("Desc", new
+   {
+       @class = "text-danger"
+   })
+        <label asp-for="AdultBedCount">AdultBedCount</label>
+        <input placeholder="AdultBedCount" asp-for="AdultBedCount" class="form-control" />
+        @Html.ValidationMessage("AdultBedCount", new
+   {
+       @class = "text-danger"
+   })
+        <label asp-for="ChildBedCount">ChildBedCount</label>
+        <input placeholder="ChildBedCount" asp-for="ChildBedCount" class="form-control" />
+        @Html.ValidationMessage("ChildBedCount", new
+   {
+       @class = "text-danger"
+   })
+        <label asp-for="NightlyPrice">NightlyPrice</label>
+        <input placeholder="NightlyPrice" asp-for="NightlyPrice" class="form-control" />
+        @Html.ValidationMessage("NightlyPrice", new
+   {
+       @class = "text-danger"
+   })
+        <label asp-for="Files">Files</label>
+        <input placeholder="Files" asp-for="Files" class="form-control" />
+        @Html.ValidationMessage("Files", new
+   {
+       @class = "text-danger"
+   })
+    </div>
+    <button class="btn btn-primary" type="submit">Add</button>
+
+</form>
+

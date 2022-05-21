@@ -1,0 +1,254 @@
+﻿@model EditLayoutViewModel
+@{
+    ViewData["Title"] = "EditLayout";
+}
+
+<div class="d-flex flex-column gap-5">
+    <form asp-controller="Settings" asp-action="LayoutSaveSettings" enctype="multipart/form-data" method="post">
+        <div class="d-flex flex-column">
+            <h1>EditLayout</h1>
+            <div class="form-group">
+                <label asp-for="BaseSlider.Title">Title</label>
+                <input class="form-control" asp-for="BaseSlider.Title" placeholder="Title" />
+                <span asp-validation-for="BaseSlider.Title"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BaseSlider.Desc">Desc</label>
+                <input class="form-control" asp-for="BaseSlider.Desc" placeholder="Desc" />
+                <span asp-validation-for="BaseSlider.Desc"></span>
+            </div>
+            <img style="width:100px;height:100px;object-fit:cover;object-position:center;" src="~/img/@Model.OriginalBaseSlider.Photo" alt="Alternate Text" />
+            <div class="form-group">
+                <label asp-for="BaseSlider.Photo">Photo</label>
+                <input class="form-control" asp-for="BaseSlider.Photo" />
+                <span asp-validation-for="BaseSlider.Photo"></span>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Save</button>
+    </form>
+    <div>
+        <h1>Add Blog</h1>
+        <table class="table table-dark mb-3">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Photo
+                    </th>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Text
+                    </th>
+                    <th>
+                        Button Text
+                    </th>
+                    <th>
+                        Button Url
+                    </th>
+                    <th>
+                        Action Buttons
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.blogItems)
+                {
+                    <tr>
+                        <td>
+                            @item.Id
+                        </td>
+                        <td>
+                            <img src="~/img/@item.Image" alt="Alternate Text" />
+                        </td>
+                        <td>
+                            @item.Title
+                        </td>
+                        <td>
+                            @item.Text
+                        </td>
+                        <td>
+                            @item.ButtonText
+                        </td>
+                        <td>
+                            @item.ButtonUrl
+                        </td>
+                        <td>
+                            <a asp-route-id="@item.Id" asp-controller="Settings" asp-action="DeleteBlogItem">
+                                <button class="btn btn-danger">Delete</button>
+                            </a>
+
+
+                            <a asp-route-id="@item.Id" asp-controller="Settings" asp-action="UpdateBlogItem">
+                                <button class="btn btn-primary">Update</button>
+                            </a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <form asp-controller="Settings" asp-action="AddBlog" enctype="multipart/form-data" method="post">
+
+            <div class="form-group">
+                <label asp-for="BlogViewModel.Title">Title</label>
+                <input class="form-control" asp-for="BlogViewModel.Title" placeholder="Title" />
+                <span asp-validation-for="BlogViewModel.Title"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BlogViewModel.Text">Text</label>
+                <input class="form-control" asp-for="BlogViewModel.Text" placeholder="Text" />
+                <span asp-validation-for="BlogViewModel.Text"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="BlogViewModel.Image">Image</label>
+                <input class="form-control" asp-for="BlogViewModel.Image" placeholder="Image" />
+                <span asp-validation-for="BlogViewModel.Image"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="BlogViewModel.ButtonText">ButtonText</label>
+                <input class="form-control" asp-for="BlogViewModel.ButtonText" placeholder="ButtonText" />
+                <span asp-validation-for="BlogViewModel.ButtonText"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BlogViewModel.ButtonUrl">ButtonUrl</label>
+                <input class="form-control" asp-for="BlogViewModel.ButtonUrl" placeholder="ButtonUrl" />
+                <span asp-validation-for="BlogViewModel.ButtonUrl"></span>
+            </div>
+            <button class="btn btn-primary" type="submit">Save</button>
+        </form>
+
+
+        <div class="d-flex flex-column gap-5">
+            <form asp-controller="Settings" asp-action="UpdatePhotoSlider" enctype="multipart/form-data" method="post">
+                <div class="d-flex flex-column">
+                    <h1>Edit Photo Slider</h1>
+                    <div class="form-group">
+                        <label asp-for="roomPhotoSlider.Title">Title</label>
+                        <input value="@Model.roomPhotoSlider.Title" class="form-control" asp-for="roomPhotoSlider.Title" placeholder="Title" />
+                        <span asp-validation-for="roomPhotoSlider.Title"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="roomPhotoSlider.Desc">Desc</label>
+                        <input value="@Model.roomPhotoSlider.Desc" class="form-control" asp-for="roomPhotoSlider.Desc" placeholder="Desc" />
+                        <span asp-validation-for="roomPhotoSlider.Desc"></span>
+                    </div>
+
+                </div>
+                <button class="btn btn-primary" type="submit">Save</button>
+            </form>
+            <div>
+            </div>
+
+        </div>
+
+        <table class="table table-dark mb-3">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Count
+                    </th>
+                    <th>
+                        Count Text
+                    </th>
+                    <th>
+                        Buttons
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.counters)
+                {
+                    <tr>
+                        <td>
+                            @item.Id
+                        </td>
+                        <td>
+                            @item.Count
+                        </td>
+
+                        <td>
+                            @item.CountText
+                        </td>
+
+
+
+                        <td>
+                            <a asp-route-id="@item.Id" asp-controller="Settings" asp-action="DeleteCounterItem">
+                                <button class="btn btn-danger">Delete</button>
+                            </a>
+
+
+                            <a asp-route-id="@item.Id" asp-controller="Settings" asp-action="UpdateCounterItem">
+                                <button class="btn btn-primary">Update</button>
+                            </a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <form asp-controller="Settings" asp-action="AddCounterItem" enctype="multipart/form-data" method="post">
+            <div class="d-flex flex-column">
+                <h1>Add Counter Item</h1>
+                <div class="form-group">
+                    <label asp-for="AddCounterViewModel.Count">Count</label>
+                    <input class="form-control" asp-for="AddCounterViewModel.Count" placeholder="Count" />
+                    <span asp-validation-for="AddCounterViewModel.Count"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AddCounterViewModel.CountText">CountText</label>
+                    <input class="form-control" asp-for="AddCounterViewModel.CountText" placeholder="CountText" />
+                    <span asp-validation-for="AddCounterViewModel.CountText"></span>
+                </div>
+
+            </div>
+            <button class="btn btn-primary" type="submit">Save</button>
+        </form>
+
+        <form asp-controller="Settings" asp-action="EditRoomSlider" enctype="multipart/form-data" method="post">
+            <div class="d-flex flex-column">
+                <h1>Edit Room Slider</h1>
+                <div class="form-group">
+                    <label asp-for="roomSliders.Title">Title</label>
+                    <input value="@Model?.roomSliders?.Title" class="form-control" asp-for="roomSliders.Title" placeholder="Title" />
+                    <span asp-validation-for="roomSliders.Title"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="roomSliders.Desc">Desc</label>
+                    <input value="@Model?.roomSliders?.Desc" class="form-control" asp-for="roomSliders.Desc" placeholder="Desc" />
+                    <span asp-validation-for="roomSliders.Desc"></span>
+                </div>
+
+            </div>
+            <button class="btn btn-primary" type="submit">Save</button>
+        </form>
+
+
+
+        <form asp-controller="Settings" asp-action="EditCommentSlider" enctype="multipart/form-data" method="post">
+            <div class="d-flex flex-column">
+                <h1>Edit Comment Slider</h1>
+                <div class="form-group">
+                    <label asp-for="CommentSlider.Title">Title</label>
+                    <input value="@Model?.CommentSlider?.Title" class="form-control" asp-for="CommentSlider.Title" placeholder="Title" />
+                    <span asp-validation-for="CommentSlider.Title"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CommentSlider.Desc">Desc</label>
+                    <input value="@Model?.CommentSlider?.Desc" class="form-control" asp-for="CommentSlider.Desc" placeholder="Desc" />
+                    <span asp-validation-for="CommentSlider.Desc"></span>
+                </div>
+
+            </div>
+            <button class="btn btn-primary" type="submit">Save</button>
+        </form>

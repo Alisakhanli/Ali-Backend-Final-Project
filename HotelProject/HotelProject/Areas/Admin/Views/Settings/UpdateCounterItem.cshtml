@@ -1,0 +1,24 @@
+﻿@model UpdateCounterViewModel
+@{
+    ViewData["Title"] = "UpdateCounterItem";
+}
+
+<form asp-route-id="@Model.Id" asp-controller="Settings" asp-action="UpdateCounterItem" enctype="multipart/form-data" method="post">
+    <div class="d-flex flex-column">
+        <h1>Edit Photo Slider</h1>
+        <div class="form-group">
+            <label asp-for="Count">Count</label>
+            <input value="Count" class="form-control" asp-for="Count" placeholder="Count" />
+            <span asp-validation-for="Count"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CountText">CountText</label>
+            <input value="CountText" class="form-control" asp-for="CountText" placeholder="CountText" />
+            <span asp-validation-for="CountText"></span>
+        </div>
+        
+      
+
+    </div>
+    <button class="btn btn-primary" type="submit">Save</button>
+</form>

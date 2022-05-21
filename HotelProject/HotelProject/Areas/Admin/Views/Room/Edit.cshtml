@@ -1,0 +1,127 @@
+﻿@model RoomEditViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="d-flex flex-column">
+    <h1>Editing @Model.Name</h1>
+    <div class="d-flex flex-wrap">
+        @foreach (var item in Model.RoomData.RoomPhotos)
+        {
+            <div class="d-flex flex-column">
+                <img style="width:150px;height:150px;object-fit:cover;object-position:center;border-radius:10px;" src="~/img/@item.Photo" alt="Alternate Text" />
+                <form asp-controller="Room" asp-action="DeleteRoomPhoto" method="post" asp-route-id="@item.Id">
+                    <input type="hidden" name="roomId" value="@Model.Id" />
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
+
+
+            </div>
+        }
+    </div>
+    <div class="d-flex flex-wrap">
+        @foreach (var item in Model.Features)
+        {
+            var f = Model.RoomFeatures.Where(f => f.RoomId == Model.Id && f.FeatureId == item.Id).FirstOrDefault();
+            if (f == null)
+            {
+                <div class="d-flex flex-column m-2">
+                    <img style="width:100px;height:100px;object-fit:contain;object-position:center;" src="~/img/features/@item.Icon" alt="Alternate Text" />
+                    <h5>@item.Text</h5>
+                    <button data-room-id="@Model.Id" data-feature-id="@item.Id" class="btn btn-primary mt-2 add-feature">Add</button>
+                </div>
+            }
+            else
+            {
+                <div class="d-flex flex-column m-2">
+                    <img style="width:100px;height:100px;object-fit:contain;object-position:center;" src="~/img/features/@item.Icon" alt="Alternate Text" />
+                    <h5>@item.Text</h5>
+                    <button data-room-id="@Model.Id" data-feature-id="@item.Id" class="btn btn-danger mt-2 remove-feature">Remove</button>
+                </div>
+            }
+
+        }
+    </div>
+    <form method="post" enctype="multipart/form-data" asp-controller="Room" asp-action="Edit" asp-route-id="@Model.Id">
+        <div class="d-flex flex-column">
+            <h1>AddRoom</h1>
+            <label asp-for="Name">Name</label>
+            <input placeholder="Name" asp-for="Name" class="form-control" />
+            @Html.ValidationMessage("Name", new
+       {
+           @class = "text-danger"
+       })
+            <label asp-for="Desc">Desc</label>
+            <input placeholder="Desc" asp-for="Desc" class="form-control" />
+            @Html.ValidationMessage("Desc", new
+       {
+           @class = "text-danger"
+       })
+            <label asp-for="AdultBedCount">AdultBedCount</label>
+            <input placeholder="AdultBedCount" asp-for="AdultBedCount" class="form-control" />
+            @Html.ValidationMessage("AdultBedCount", new
+       {
+           @class = "text-danger"
+       })
+            <label asp-for="ChildBedCount">ChildBedCount</label>
+            <input placeholder="ChildBedCount" asp-for="ChildBedCount" class="form-control" />
+            @Html.ValidationMessage("ChildBedCount", new
+       {
+           @class = "text-danger"
+       })
+            <label asp-for="NightlyPrice">NightlyPrice</label>
+            <input placeholder="NightlyPrice" asp-for="NightlyPrice" class="form-control" />
+            @Html.ValidationMessage("NightlyPrice", new
+       {
+           @class = "text-danger"
+       })
+
+            <label asp-for="RoomPhotos">Files</label>
+            <input placeholder="Files" asp-for="RoomPhotos" class="form-control" />
+            @Html.ValidationMessage("Files", new
+       {
+           @class = "text-danger"
+       })
+        </div>
+        <button class="btn btn-primary" type="submit">Add</button>
+
+    </form>
+</div>
+@section scripts{ 
+
+    <script>
+        $(".add-feature").on("click", function () {
+
+            const id = $(this).data("feature-id")
+            const roomId = $(this).data("room-id")
+            $.ajax({
+                url: "/admin/room/AddFeature/" + id,
+                method:"Post",
+                data: { roomId: roomId }, success: function (response) {
+
+                    window.location.reload()
+
+                }
+
+            })
+        })
+        $(".remove-feature").on("click", function () {
+
+            const id = $(this).data("feature-id")
+            const roomId = $(this).data("room-id")
+            $.ajax({
+                url: "/admin/room/RemoveFeature/" + id,
+                method: "Post",
+                data: { roomId: roomId }, success: function (response) {
+
+                    window.location.reload()
+
+                }
+
+            })
+        })
+    </script>
+
+
+}
+
+

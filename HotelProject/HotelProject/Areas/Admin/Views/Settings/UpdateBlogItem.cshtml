@@ -1,0 +1,38 @@
+﻿@model BlogViewModel
+@{
+    ViewData["Title"] = "UpdateBlogItem";
+}
+
+<h1>UpdateBlogItem</h1>
+
+<form asp-route-id="@Model.Id" asp-controller="Settings" asp-action="UpdateBlogItem" enctype="multipart/form-data" method="post">
+
+    <div class="form-group">
+        <label asp-for="Title">Title</label>
+        <input class="form-control" asp-for="Title" placeholder="Title" />
+        <span asp-validation-for="Title"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Text">Text</label>
+        <input class="form-control" asp-for="Text" placeholder="Text" />
+        <span asp-validation-for="Text"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Image">Image</label>
+        <input class="form-control" asp-for="Image" placeholder="Image" />
+        <span asp-validation-for="Image"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ButtonText">ButtonText</label>
+        <input class="form-control" asp-for="ButtonText" placeholder="ButtonText" />
+        <span asp-validation-for="ButtonText"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ButtonUrl">ButtonUrl</label>
+        <input class="form-control" asp-for="ButtonUrl" placeholder="ButtonUrl" />
+        <span asp-validation-for="ButtonUrl"></span>
+    </div>
+    <button class="btn btn-primary" type="submit">Save</button>
+</form>

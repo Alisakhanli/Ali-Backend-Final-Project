@@ -1,0 +1,18 @@
+﻿
+@model SettingsViewModel
+@{
+    ViewData["Title"] = "Settings";
+}
+
+<h1>Settings</h1>
+<form asp-route-id="@Model.User.Id" enctype="multipart/form-data" asp-action="SaveSettings" asp-controller="Settings" method="post">
+    <div class="d-flex flex-column">
+        <img style="width:100px;height:100px;object-fit:cover;object-position:center;" src="~/img/@Model.User.Photo" alt="Alternate Text" />
+        <input asp-for="Photo" class="form-control" />
+        <span asp-validation-for="Photo"></span>
+        <input asp-for="Name" placeholder="Name" value="@Model.User.Name" class="form-control" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+

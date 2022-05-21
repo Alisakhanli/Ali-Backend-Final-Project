@@ -1,0 +1,244 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" href="~/img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    <!-- page title -->
+    <title>Hotel</title>
+</head>
+
+<body>
+    <!-- page wrapper -->
+    <div class="hotel-app">
+        <!-- preloader -->
+        <div class="hotel-preloader-frame">
+            <div class="hotel-preloader imgLoad">
+                <img class="lozad" src="~/img/hotellogo.png" alt="logo" />
+                <div class="hotel-preloader-progress">
+                    <div class="hotel-preloader-bar"></div>
+                </div>
+                <div>
+                    <span class="hotel-preloader-number" data-count="101">0</span>%
+                </div>
+            </div>
+        </div>
+        <!-- preloader end -->
+        <!-- datepicker frame -->
+        <div class="hotel-datepicker-place"></div>
+
+        <!-- top bar -->
+        <div class="hotel-top-bar">
+            <div class="container">
+                <div class="hotel-left-side">
+                    <!-- logo -->
+                    <a href="~/index.html" class="hotel-logo-frame" style="width: 50px;">
+                        <img src="~/img/hotellogo.png" alt="logo">
+                    </a>
+                    <!-- logo end -->
+                </div>
+                <div class="hotel-right-side">
+                    <!-- menu -->
+                    <div class="hotel-menu">
+                        <nav>
+                            <ul>
+                                <li class="current-item">
+                                    <a asp-action="Index" asp-controller="Home">Ana Səhifə</a>
+                                </li>
+                                <li>
+                                    <a asp-action="About" asp-controller="Home">Haqqımızda </a>
+                                </li>
+                                <li>
+                                    <a asp-action="Hotels" asp-controller="Home">Hotellər</a>
+                                </li>
+                                <li>
+                                    <a asp-action="Rooms" asp-controller="Home">Otaqlar</a>
+                                </li>
+                                <li>
+                                    <a asp-action="Services" asp-controller="Home">Xidmətlərimiz</a>
+                                </li>
+                                <li>
+                                    <a asp-action="Contact" asp-controller="Home">Əlaqə</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- menu end -->
+                    <!-- action button -->
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-action="Logout" asp-controller="Account">Logout</a>
+
+                    }
+                    else
+                    {
+                        <a asp-action="Index" asp-controller="Account">Login</a>
+
+                    }
+                    @if (User.IsInRole("Admin")||User.IsInRole("Moderator")||User.IsInRole("CEO"))
+                    {
+                        <a asp-controller="Dashboard" asp-action="Index" asp-area="Admin">Admin</a> 
+                    }
+                    <!-- action button end -->
+                </div>
+                <!-- menu button -->
+                <div class="hotel-menu-btn"><span></span></div>
+                <!-- menu button end -->
+            </div>
+        </div>
+        <!-- top bar end -->
+        @RenderBody()
+        <!-- footer -->
+        <footer class="footer-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer-logo">
+                            <a href="~/#"><img src="~/img/logo" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pb-50">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single-footer-widget">
+                            <h5>Location</h5>
+                            <div class="widget-text">
+                                <i class="fa fa-map-marker"></i>
+                                <p>1525 Boring Lane, <br />Los Angeles, CA</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single-footer-widget">
+                            <h5>Reception</h5>
+                            <div class="widget-text">
+                                <i class="fa fa-phone"></i>
+                                <p>+1 (603)535-4592</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single-footer-widget">
+                            <h5>Shuttle Service</h5>
+                            <div class="widget-text">
+                                <i class="fa fa-phone"></i>
+                                <p>+1 (603)535-4592</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single-footer-widget">
+                            <h5>Restaurant</h5>
+                            <div class="widget-text">
+                                <i class="fa fa-phone"></i>
+                                <p>+1 (603)535-4592</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright-area">
+                <div class="container">
+                    <div class="copyright-text">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="~/#" target="_blank">Alishka</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </div>
+                    
+                </div>
+            </div>
+        </footer>
+        <!-- footer end -->
+        <!-- popup -->
+        <div id="hotel-success" class="hotel-popup imgLoad">
+            <img class="lozad" data-src="~/img/features/12.svg"
+                 alt="success"
+                 class="hotel-succes-icon" />
+            <h2 class="hotel-mb-20">Uğurlu</h2>
+            <p>
+                Ancaq mesaj göndərilməyib. <br />Bu pop-up nümayiş üçün
+                mövcuddur.
+            </p>
+        </div>
+        <!-- popup end -->
+        <!-- popup -->
+        <div class="hotel-popup-frame">
+            <div class="hotel-book-form hotel-book-popup">
+                <span class="hotel-close-popup">+</span>
+                <h2 class="hotel-mb-40">Giriş</h2>
+                <form>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="hotel-input-frame">
+                                <label>Istifadəçi adı</label>
+                                <input type="text" />
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="hotel-input-frame">
+                                <label class="hotel-add-icon">Şifrə</label>
+                                <input type="password" />
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-12 hotel-center imgLoad">
+                            <button type="submit" class="hotel-btn">
+                                <img class="lozad" data-src="~/img/icons/search.svg"
+                                     class="hotel-zoom"
+                                     alt="icon" />Giriş
+                            </button>
+                            <button type="submit" class="hotel-btn">
+                                <a href="~/#"><img class="lozad" data-src="~/img/icons/search.svg" class="hotel-zoom" alt="icon" />Qeydiyyat</a>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- popup end -->
+
+
+
+
+
+
+    </div>
+    <!-- page wrapper end -->
+    <!-- jquery js -->
+    <script src="~/js/plugins/jquery.min.js"></script>
+    <script src="~/js/plugins/lozad.js"></script>
+    <script src="~/https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.js"></script>
+    <script>
+        const observer = lozad();
+        observer.observe();
+    </script>
+    <!-- bootstrap js -->
+    <script src="~/js/plugins/bootstrap.min.js"></script>
+    <!-- nice select js -->
+
+    <script src="~/js/plugins/jquery.nice-select.min.js"></script>
+    <!-- datepicker js -->
+    <script src="~/js/plugins/datepicker.js"></script>
+    <!-- smooth scroll js -->
+    <script src="~/js/plugins/smooth-scroll.js"></script>
+    <!-- isotope js -->
+    <script src="~/js/plugins/isotope.min.js"></script>
+    <!-- mapbox js -->
+    <script src="~/js/plugins/mapbox.min.js"></script>
+    <!-- fancybox js -->
+    <script src="~/https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.2.1/lightgallery.min.js"></script>
+    <script src="~/js/plugins/fancybox.min.js"></script>
+    <!-- swiper js -->
+    <script src="~/js/plugins/swiper.min.js"></script>
+    <!-- sticky js -->
+    <script src="~/js/plugins/sticky.js"></script>
+    <!-- kinsley js -->
+    <script src="~/js/main.js"></script>
+</body>
+</html>

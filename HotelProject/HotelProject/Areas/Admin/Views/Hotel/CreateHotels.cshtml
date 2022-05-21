@@ -1,0 +1,23 @@
+﻿@model CreateHotelViewModel
+@{
+    ViewData["Title"] = "CreateHotels";
+}
+
+<h1>CreateHotels</h1>
+<form asp-action="CreateHotels" asp-controller="Hotel" method="post" enctype="multipart/form-data">
+    <div class="d-flex flex-column">
+        <label  class="mt-4" asp-for="Name">Name</label>
+        <input class="form-control" asp-for="Name" placeholder="Name" />
+        <span asp-validation-for="Name"></span>
+        <label  class="mt-4" asp-for="Desc">Desc</label>
+        <input class="form-control" asp-for="Desc" placeholder="Desc" />
+        <span asp-validation-for="Desc"></span>
+        <label class="mt-4" asp-for="Star">Star</label>
+        <input class="form-control" min="0" max="5" asp-for="Star" placeholder="Star" />
+        <span asp-validation-for="Star"></span>
+        <label  class="mt-4" asp-for="File">File</label>
+        <input class="form-control" asp-for="File" placeholder="File" />
+        <span asp-validation-for="File"></span>
+        <button class="btn btn-primary" type="submit">Add</button>
+    </div>
+</form>

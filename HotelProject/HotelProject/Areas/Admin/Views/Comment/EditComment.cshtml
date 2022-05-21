@@ -1,0 +1,17 @@
+﻿@model RoomComment
+@{
+    ViewData["Title"] = "EditComment";
+}
+
+<div class="d-flex flex-column">
+    <h1>EditComment</h1>
+
+    <form asp-action="UpdateComment" asp-controller="Comment" asp-route-id="@Model.Id" method="post">
+        <div class="form-control">
+            <label>Text</label>
+            <textarea class="form-control" asp-for="Text" placeholder="Texts"></textarea>
+        </div>
+        
+        <button class="btn btn-primary" type="submit">Save</button>
+    </form>
+</div>

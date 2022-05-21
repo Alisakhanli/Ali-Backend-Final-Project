@@ -1,0 +1,30 @@
+﻿@model UpdateHotelViewModel
+@{
+    ViewData["Title"] = "UpdateHotel";
+}
+
+<h1>UpdateHotel</h1>
+
+<form asp-controller="Hotel" asp-action="UpdateHotel" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input value="@Model.Name" class="form-control" asp-for="Name" placeholder="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Desc">Desc</label>
+        <input value="@Model.Desc" class="form-control" asp-for="Desc" placeholder="Desc" />
+        <span asp-validation-for="Desc"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Star">Star</label>
+        <input value="@Model.Star" class="form-control" asp-for="Star" placeholder="Star" />
+        <span asp-validation-for="Star"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Photo">Star</label>
+        <input value="@Model.Photo" class="form-control" asp-for="Photo" placeholder="Photo" />
+        <span asp-validation-for="Photo"></span>
+    </div>
+    <button class="btn btn-primary" type="submit">Save</button>
+</form>
